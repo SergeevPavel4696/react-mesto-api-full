@@ -1,0 +1,22 @@
+.header__sign {
+    position: absolute;
+    font-family: Inter, serif;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    top: 51px;
+    right: 0;
+    background: none;
+    transition: opacity 0.3s;
+}
+
+.header__sign:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}

@@ -1,0 +1,15 @@
+.card__like-number {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    width: 62px;
+    height: 12px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
