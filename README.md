@@ -3,4 +3,5 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-(http://sergeevpavel.mesto.nomoredomains.icu/)
+
+[Ссылка на проект](http://sergeevpavel.mesto.nomoredomains.icu)
