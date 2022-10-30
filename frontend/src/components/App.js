@@ -137,21 +137,21 @@ function App() {
                     if (response.data) {
                         setUserEmail(response.data.email);
                         setLoggedIn(true);
-                        history.push("/react-mesto-auth");
+                        history.push("");
                     }
                 })
                 .catch(() => {
                     setUserEmail("");
                     setLoggedIn(false);
-                    history.push("/react-mesto-auth/sign-in");
+                    history.push("/sign-in");
                 });
         }
     }
 
     function handleSignText() {
-        if (window.location.pathname === "/react-mesto-auth/sign-in") {
+        if (window.location.pathname === "/sign-in") {
             setSignText("Регистрация")
-        } else if (window.location.pathname === "/react-mesto-auth/sign-up") {
+        } else if (window.location.pathname === "/sign-up") {
             setSignText("Вход")
         } else {
             setSignText("Выйти")
@@ -181,7 +181,7 @@ function App() {
                     localStorage.setItem("token", response.token);
                     setLoggedIn(true);
                     handleTokenCheck();
-                    history.push('/react-mesto-auth');
+                    history.push("");
                 }
             })
             .catch(err => console.log(err));
@@ -191,16 +191,16 @@ function App() {
         localStorage.removeItem("token")
         setLoggedIn(false);
         setUserEmail("");
-        if (window.location.pathname === "/react-mesto-auth/sign-in") {
-            history.push("/react-mesto-auth/sign-up");
+        if (window.location.pathname === "/sign-in") {
+            history.push("/sign-up");
         } else {
-            history.push("/react-mesto-auth/sign-in");
+            history.push("/sign-in");
         }
     }
 
     function closeLoadSignPopup() {
         setIsLoadSign(false);
-        history.push('/react-mesto-auth/sign-in');
+        history.push("/sign-in");
     }
 
 
@@ -232,10 +232,10 @@ function App() {
                     email={userEmail}
                     onSign={handleSign}
                 />
-                <Route path="/react-mesto-auth/sign-in">
+                <Route path="/sign-in">
                     <Login onLogin={onLogin}/>
                 </Route>
-                <Route path="/react-mesto-auth/sign-up">
+                <Route path="/sign-up">
                     <Register onRegister={onRegister}/>
                     <InfoTooltip
                         isOpen={isLoadSign}

@@ -75,7 +75,7 @@ function Register(props) {
             </button>
             <p className="form__switch-login-register">
                 Уже зарегистрированы?
-                <Link className="form__switch-login-register" to="/react-mesto-auth/sign-in"> Вход</Link>
+                <Link className="form__switch-login-register" to="/sign-in"> Вход</Link>
             </p>
         </form>
     );
