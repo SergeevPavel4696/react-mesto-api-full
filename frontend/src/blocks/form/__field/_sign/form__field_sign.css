@@ -1,0 +1,8 @@
+.form__field_sign {
+    border-bottom: solid 1px #ccc;
+    color: #fff;
+}
+
+.form__field_sign::-webkit-input-placeholder {
+    color: #ccc;
+}

@@ -1,0 +1,23 @@
+.card__like {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    width: 22px;
+    height: 19px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-image: url("../../../images/card__like.svg");
+    background-color: #fff;
+    transition: opacity 0.2s ease, background-image 0.2s ease;
+    cursor: pointer;
+}
+
+.card__like:hover {
+    opacity: 0.5;
+}
+
+.card__like:active {
+    opacity: 1;
+    background-image: url("../../../images/card__like_dark.svg");
+}

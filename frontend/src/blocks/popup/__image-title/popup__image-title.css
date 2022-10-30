@@ -1,0 +1,17 @@
+.popup__image-title {
+    grid-row: 3;
+    grid-column: 2;
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    max-width: 291px;
+    z-index: 2;
+}

@@ -1,0 +1,14 @@
+.profile {
+    display: grid;
+    grid-template-columns: 120px calc(100% - 270px) 150px;
+    grid-template-rows: auto;
+    width: 100%;
+    padding: 40px 0 51px;
+}
+
+@media screen and (max-width: 800px) {
+    .profile {
+        grid-template-columns: 1fr 100% 1fr;
+        padding: 42px 0 36px;
+    }
+}
