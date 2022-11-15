@@ -3,5 +3,6 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-
-[Ссылка на проект](http://sergeevpavel.mesto.nomoredomains.icu)
+IP 62.84.125.137
+Frontend (https://mesta.nomoredomains.icu/)
+Backend (https://api.mesta.nomoredomains.icu/)
