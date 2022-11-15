@@ -1,0 +1,9 @@
+.form__save_sign {
+    color: #000;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.form__save_sign:hover {
+    background-color: rgb(255, 255, 255, 0.85);
+}

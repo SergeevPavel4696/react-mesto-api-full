@@ -1,0 +1,18 @@
+.popup__content_image {
+    width: max-content;
+    height: max-content;
+}
+
+@media screen and (max-width: 567px) {
+    .popup__content_image {
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 478px) {
+    .popup__content_image {
+        width: max-content;
+        height: max-content;
+    }
+}

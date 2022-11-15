@@ -1,0 +1,8 @@
+.header__sign_email {
+    right: 80px;
+}
+
+.header__sign_email:hover {
+    opacity: 1;
+    cursor: auto;
+}
