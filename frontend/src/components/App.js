@@ -67,7 +67,7 @@ function App() {
                 closeAllPopups();
             })
             .catch(err => {
-                console.log(err);
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
                 setButtonText("Произошла ошибка");
             })
             .finally(() => {
@@ -80,13 +80,17 @@ function App() {
     function handleUpdateUser(userInfo, buttonText, buttonTextInProcess, setButtonText) {
         handleResponse(api.updateUserInfo(userInfo)
             .then(setCurrentUser)
-            .catch(console.log), buttonText, buttonTextInProcess, setButtonText);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            }), buttonText, buttonTextInProcess, setButtonText);
     }
 
     function handleUpdateAvatar(avatar, buttonText, buttonTextInProcess, setButtonText) {
         handleResponse(api.updateUserAvatar(avatar)
             .then(setCurrentUser)
-            .catch(console.log), buttonText, buttonTextInProcess, setButtonText);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            }), buttonText, buttonTextInProcess, setButtonText);
     }
 
     function handleLikeCard(card) {
@@ -95,13 +99,17 @@ function App() {
             .then(newCard => {
                 setCards(state => state.map(c => c._id === card._id ? newCard : c));
             })
-            .catch(console.log);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            });
     }
 
     function handleDeleteCard(id) {
         api.deleteCard(id)
             .then(setCards(state => state.filter(c => c._id !== id)))
-            .catch(console.log);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            });
     }
 
     function handleAddPlace(card, buttonText, buttonTextInProcess, setButtonText) {
@@ -110,34 +118,32 @@ function App() {
                     setCards([newCard, ...cards]);
                 }
             )
-            .catch(console.log), buttonText, buttonTextInProcess, setButtonText);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`)
+            }), buttonText, buttonTextInProcess, setButtonText);
     }
 
     function handleTokenCheck() {
-        if (localStorage.getItem("token")) {
-            auth.checkToken()
-                .then(res => {
-                    if (res) {
-                        setUserEmail(res.email);
-                        setLoggedIn(true);
-                        history.push(home);
-                    }
-                })
-                .catch(() => {
-                    setUserEmail("");
-                    setLoggedIn(false);
-                    history.push(`${home}/sign-in`);
-                });
-        }
+        auth.checkToken()
+            .then(res => {
+                setUserEmail(res.email);
+                setLoggedIn(true);
+                history.push(home);
+            })
+            .catch(() => {
+                setUserEmail("");
+                setLoggedIn(false);
+                history.push(`${home}/sign-in`);
+            });
     }
 
     function handleSignText() {
         if (window.location.pathname === `${home}/sign-in`) {
-            setSignText("Регистрация")
+            setSignText("Регистрация");
         } else if (window.location.pathname === `${home}/sign-up`) {
-            setSignText("Вход")
+            setSignText("Вход");
         } else {
-            setSignText("Выйти")
+            setSignText("Выйти");
         }
     }
 
@@ -150,7 +156,7 @@ function App() {
             })
             .catch(err => {
                 setIsLoadSignError(true);
-                console.log(err)
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
             })
             .finally(() => {
                 setIsLoadSign(true);
@@ -161,23 +167,33 @@ function App() {
         auth.authorize(email, password)
             .then(res => {
                 if (res.token) {
-                    localStorage.setItem("token", res.token);
                     setLoggedIn(true);
-                    handleTokenCheck();
                     history.push(home);
                 }
             })
-            .catch(console.log);
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            });
     }
 
     function handleSign() {
-        localStorage.removeItem("token")
-        setLoggedIn(false);
-        setUserEmail("");
-        if (window.location.pathname === `${home}/sign-in`) {
-            history.push(`${home}/sign-up`);
+        if (loggedIn) {
+            auth.out()
+                .then(res => {
+                    setLoggedIn(false);
+                    setUserEmail("");
+                    history.push(`${home}/sign-in`);
+                    console.log(res.message);
+                })
+                .catch(err => {
+                    console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+                });
         } else {
-            history.push(`${home}/sign-in`);
+            if (window.location.pathname === `${home}/sign-in`) {
+                history.push(`${home}/sign-up`);
+            } else {
+                history.push(`${home}/sign-in`);
+            }
         }
     }
 
@@ -186,15 +202,16 @@ function App() {
         history.push(`${home}/sign-in`);
     }
 
-
     useEffect(() => {
-        Promise.all([api.initializeProfile(), api.initialCards()])
+        loggedIn && Promise.all([api.initializeProfile(), api.initialCards()])
             .then(([info, cards]) => {
                 setCurrentUser(info);
                 setCards(cards.slice().reverse());
             })
-            .catch(console.log);
-    }, [setCurrentUser, setCards, setLoggedIn])
+            .catch(err => {
+                console.log(`Ошибка: ${err.status}.\n${err.message}.`);
+            });
+    }, [loggedIn]);
 
     useEffect(() => {
         handleTokenCheck();

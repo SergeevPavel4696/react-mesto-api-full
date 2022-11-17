@@ -31,6 +31,13 @@ class Auth {
         }).then(this._checkResponse);
     };
 
+    out() {
+        return fetch(`${this._url}/signout`, {
+            headers: this._headers,
+            credentials: this._credentials
+        }).then(this._checkResponse);
+    };
+
     checkToken() {
         return fetch(`${this._url}/users/me`, {
             headers: {'Content-Type': 'application/json'},
